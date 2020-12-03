@@ -34,20 +34,20 @@ public class Task2 extends JFrame {
                 new Point3D(0, 100, 100)
         );
 
-//        Cube3D old = new Cube3D(
-//                new Point3D(0 + 100,0+ 100,0+ 100),
-//                new Point3D(100+ 100, 0+ 100, 0+ 100),
-//                new Point3D(100+ 100, 100+ 100, 0+ 100),
-//                new Point3D(0+ 100, 100+ 100,0+ 100),
-//
-//                new Point3D(100 + 100, 0+ 100, 50+ 100),
-//                new Point3D(0+ 100,0+ 100,100+ 100),
-//                new Point3D(50+ 100, 0+ 100, 100+ 100),
-//                new Point3D(100+ 100, 50+ 100, 100+ 100),
-//
-//                new Point3D(100+ 100, 100+ 100, 100+ 100),
-//                new Point3D(0+ 100, 100+ 100, 100+ 100)
-//        );
+        Cube3D old = new Cube3D(
+                new Point3D(0 + 100,0+ 100,0+ 100),
+                new Point3D(100+ 100, 0+ 100, 0+ 100),
+                new Point3D(100+ 100, 100+ 100, 0+ 100),
+                new Point3D(0+ 100, 100+ 100,0+ 100),
+
+                new Point3D(100 + 100, 0+ 100, 50+ 100),
+                new Point3D(0+ 100,0+ 100,100+ 100),
+                new Point3D(50+ 100, 0+ 100, 100+ 100),
+                new Point3D(100+ 100, 50+ 100, 100+ 100),
+
+                new Point3D(100+ 100, 100+ 100, 100+ 100),
+                new Point3D(0+ 100, 100+ 100, 100+ 100)
+        );
 
         Cube3D rotated = cube.rotateAboutArbitraryLine(
                 new Point3D(0, 0, 0),
