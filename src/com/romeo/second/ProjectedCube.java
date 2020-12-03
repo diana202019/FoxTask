@@ -1,7 +1,6 @@
 package com.romeo.second;
 
 import java.awt.geom.Point2D;
-import javafx.geometry.Point3D;
 
 import java.awt.*;
 import java.awt.geom.Line2D;
