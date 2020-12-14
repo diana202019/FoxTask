@@ -99,7 +99,23 @@ public class Cube3D {
         LinkedList<Point3D> updatedList = new LinkedList<>();
 
         for (Point3D point : points) {
-            updatedList.add(rotationMatrix.multiplyByVertex(new PointForMatrix(point)));
+            updatedList.add(rotationMatrix.multiplyAndNormalize(new PointForMatrix(point)));
+        }
+
+        return new Cube3D(updatedList);
+    }
+
+    public Cube3D dimetric() {
+        rotationMatrix = new Matrix4X4(
+                new double[] { 0.926,    0.134,  0,  0 },
+                new double[] {     0,    0.935,  0,  0 },
+                new double[] { 0.378,   -0.327,  0,  0 },
+                new double[] {     0,        0,  0,  1 }
+        );
+        LinkedList<Point3D> updatedList = new LinkedList<>();
+
+        for (Point3D point : points) {
+            updatedList.add(rotationMatrix.multiplyAndNormalize(new PointForMatrix(point)));
         }
 
         return new Cube3D(updatedList);

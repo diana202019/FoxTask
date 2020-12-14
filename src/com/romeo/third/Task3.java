@@ -46,7 +46,13 @@ public class Task3 extends JFrame {
         );
 
         Cube3D rotated = old.rotate(Math.toRadians(10), Math.toRadians(10), Math.toRadians(10));
-        Cube3D dimetric = rotated.axonometric(Math.toRadians(19.5), Math.toRadians(20.7));
+        Cube3D izometric = cube
+                .axonometric(Math.toRadians(45), Math.toRadians(35.26469))
+                .shift(new Point3D(200, 200, 0));
+        Cube3D dimetric = cube
+                .axonometric(Math.toRadians(26.23), Math.toRadians(-29.52))
+                .shift(new Point3D(200, 200, 0));
+        // trimetric proj uses random angles
         Cube3D cabinet  = cube.
                 rotate(Math.toRadians(15), Math.toRadians(5), Math.toRadians(15)).
                 cabinet(Math.toRadians(30), Math.toRadians(60)).
@@ -79,10 +85,10 @@ public class Task3 extends JFrame {
         g.setColor(Color.GREEN);
 //        projectedToXZPlane.paint(g);
 
-//        -
-//        ProjectedCube dimetricProjection = new ProjectedCube(dimetric.project());
-//        g.setColor(Color.gray);
-//        dimetricProjection.paint(g);
+//      izometric
+        ProjectedCube dimetricProjection = new ProjectedCube(dimetric.project());
+        g.setColor(Color.gray);
+        dimetricProjection.paint(g);
 
         ProjectedCube cabinetProjection = new ProjectedCube(cabinet.project());
         g.setColor(Color.ORANGE);
@@ -94,7 +100,7 @@ public class Task3 extends JFrame {
 
         ProjectedCube twoPointProjection = new ProjectedCube(twoPointPers.project());
         g.setColor(Color.BLUE);
-        twoPointProjection.paint(g);
+//        twoPointProjection.paint(g);
 
 
     }
