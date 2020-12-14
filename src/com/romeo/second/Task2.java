@@ -1,7 +1,5 @@
 package com.romeo.second;
 
-//import javafx.geometry.Point3D;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,7 +7,7 @@ import java.awt.*;
 
 public class Task2 extends JFrame {
 
-    public Task2(){
+    public Task2() {
         JPanel panel = new JPanel();
         getContentPane().add(panel);
         setSize(720,480);
@@ -73,26 +71,9 @@ public class Task2 extends JFrame {
         g.setColor(Color.BLUE);
         projectedCubeShiftedRotated.paint(g);
 
-//        ProjectedCube projectedCubeShiftedRotated2 = new ProjectedCube(shiftedRotated2.project());
-//        g.setColor(Color.RED);
-//        projectedCubeShiftedRotated2.paint(g);
-
-//        Cube3D rotated = cube.rotate(3.5, 4, 0);
-//        System.out.println(rotated);
-//
-//        Cube3D rotatedSecond = cube.rotate(-.7, -0.3, 0.3);
-//
-//        Cube3D shifted = rotated.shift(new Point3D(200, 200, 0));
-//        Cube3D shiftedSecond = rotatedSecond.shift(new Point3D(350, 200, 0));
-//
-//        ProjectedCube projectedCube = new ProjectedCube(shifted.project());
-//        projectedCube.paint(g);
-//        ProjectedCube projectedSecond = new ProjectedCube(shiftedSecond.project());
-//        projectedSecond.paint(g);
-
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Task2 s = new Task2();
         s.setVisible(true);
     }
