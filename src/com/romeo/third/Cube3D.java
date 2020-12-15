@@ -122,8 +122,8 @@ public class Cube3D {
     }
 
     // one point
-    public Cube3D perspective(Point3D point) {
-        rotationMatrix = onePointPerspectiveProjection(point);
+    public Cube3D perspective(Point3D point, double scale) {
+        rotationMatrix = onePointPerspectiveProjection(point, scale);
         LinkedList<Point3D> coordinatesMatrix = new LinkedList<>();
 
         for (Point3D point3D : points) {
@@ -150,8 +150,8 @@ public class Cube3D {
     }
 
     // two point
-    public Cube3D perspective(Point3D point1, Point3D point2) {
-        rotationMatrix = onePointPerspectiveProjection(point1, point2);
+    public Cube3D perspective(Point3D point1, Point3D point2, double scale) {
+        rotationMatrix = onePointPerspectiveProjection(point1, point2, scale);
         LinkedList<Point3D> coordinatesMatrix = new LinkedList<>();
 
         for (Point3D point3D : points) {
@@ -161,29 +161,77 @@ public class Cube3D {
         return new Cube3D(coordinatesMatrix);
     }
 
-    private Matrix4X4 onePointPerspectiveProjection(Point3D p1, Point3D p2) {
-        double x = p1.getX(); double xDash = p2.getX();
-        double y = p1.getY(); double yDash = p2.getY();
-        double z = p1.getZ(); double zDash = p2.getZ();
+    public Cube3D perspective(double alpha, double betta, double scale) {
+        rotationMatrix = onePointPerspectiveProjection(alpha, betta, scale);
+        LinkedList<Point3D> coordinatesMatrix = new LinkedList<>();
+
+        for (Point3D point3D : points) {
+            coordinatesMatrix.add(rotationMatrix.multiplyAndNormalize(new PointForMatrix(point3D)));
+        }
+
+        return new Cube3D(coordinatesMatrix);
+    }
+
+    private Matrix4X4 onePointPerspectiveProjection(double alpha, double betta, double scale) {
+        double r = -(1.0 / 250);
 
         Matrix4X4 M1 = new Matrix4X4(
-                new double[] { 1,  0,  0,  1/x },
-                new double[] { 0,  1,  0,  1/y },
-                new double[] { 0,  0,  1,  0 },
-                new double[] { -x,  -y,  0,  1 }
+                new double[] {  1,                0,                0,  0 },
+                new double[] {  0,  Math.cos(betta),  Math.sin(alpha),  0 },
+                new double[] {  0, -Math.sin(betta),  Math.cos(alpha),  0 },
+                new double[] {  0,                0,                0,  1 }
         );
 
         Matrix4X4 M2 = new Matrix4X4(
                 new double[] { 1,  0,  0,  0 },
                 new double[] { 0,  1,  0,  0 },
-                new double[] { 0,  0,  0,  0 },
-                new double[] { x,  y,  0,  1 }
+                new double[] { 0,  0,  1,  0 },
+                new double[] { 0, -25,  0,  1 }
         );
 
-        return M1.multiply(M2);
+        Matrix4X4 M3 = new Matrix4X4(
+                new double[] { 1,  0,  0,  0 },
+                new double[] { 0,  1,  0,  0 },
+                new double[] { 0,  0,  1,  r },
+                new double[] { 0,  0,  0,  scale }
+        );
+
+        return M1.multiply(M2).multiply(M3);
     }
 
-    private Matrix4X4 onePointPerspectiveProjection(Point3D distance) {
+    private Matrix4X4 onePointPerspectiveProjection(Point3D p1, Point3D p2, double scale) {
+        double x = p1.getX(); double xDash = p2.getX();
+        double y = p1.getY(); double yDash = p2.getY();
+        double z = p1.getZ(); double zDash = p2.getZ();
+
+        double phi60 = Math.toRadians(30);
+        double r = -(1 / z);
+
+        Matrix4X4 M1 = new Matrix4X4(
+                new double[] { Math.cos(phi60),  0,  -Math.sin(phi60),  0 },
+                new double[] {               0,  1,                 0,  0 },
+                new double[] { Math.sin(phi60),  0,   Math.cos(phi60),  0 },
+                new double[] {               0,  0,                 0,  1 }
+        );
+
+        Matrix4X4 M2 = new Matrix4X4(
+                new double[] { 1,  0,  0,  0 },
+                new double[] { 0,  1,  0,  0 },
+                new double[] { 0,  0,  1,  0 },
+                new double[] { 0, -25,  0,  1 }
+        );
+
+        Matrix4X4 M3 = new Matrix4X4(
+                new double[] { 1,  0,  0,  0 },
+                new double[] { 0,  1,  0,  0 },
+                new double[] { 0,  0,  0,  r },
+                new double[] { 0,  0,  0,  scale }
+        );
+
+        return M1.multiply(M2).multiply(M3);
+    }
+
+    private Matrix4X4 onePointPerspectiveProjection(Point3D distance, double scale) {
         double x = distance.getX();
         double y = distance.getY();
         double z = distance.getZ();
@@ -192,7 +240,7 @@ public class Cube3D {
                 new double[] { 1,  0,  0,  0 },
                 new double[] { 0,  1,  0,  0 },
                 new double[] { 0,  0,  0,  1/z },
-                new double[] { -x,  -y,  0,  1 }
+                new double[] { -x,  -y,  0,  scale }
         );
 
         Matrix4X4 M2 = new Matrix4X4(
