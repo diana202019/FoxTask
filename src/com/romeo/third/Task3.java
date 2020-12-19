@@ -8,7 +8,7 @@ public class Task3 extends JFrame {
     public Task3() {
         JPanel panel = new JPanel();
         getContentPane().add(panel);
-        setSize(1080,560);
+        setSize(980,560);
 
     }
 
@@ -65,17 +65,17 @@ public class Task3 extends JFrame {
 //      -------------------------------------------------------------
 
 //      --------------- axonometric projections ---------------------
-//        Cube3D izometric = cube
-//                .axonometric(Math.toRadians(45), Math.toRadians(35.26469))
-//                .shift(new Point3D(100, 100, 0));
-//        Cube3D dimetric = cube
-//                .axonometric(Math.toRadians(26.23), Math.toRadians(-29.52))
-//                .shift(new Point3D(350, 100, 0));
-//        // trimetric proj uses random angles
-//        Cube3D trimetric = rotated
-//                .axonometric(Math.toRadians(15), Math.toRadians(30))
-//                .shift(new Point3D(500, 100, 0));
-//
+        Cube3D izometric = cube
+                .axonometric(Math.toRadians(45), Math.toRadians(35.26469))
+                .shift(new Point3D(100, 100, 0));
+        Cube3D dimetric = cube
+                .axonometric(Math.toRadians(26.23), Math.toRadians(-29.52))
+                .shift(new Point3D(350, 100, 0));
+        // trimetric proj uses random angles
+        Cube3D trimetric = rotated
+                .axonometric(Math.toRadians(15), Math.toRadians(30))
+                .shift(new Point3D(500, 100, 0));
+
 //        ProjectedCube dimetricProjection = new ProjectedCube(dimetric.project());
 //        g.setColor(Color.BLUE);
 //        dimetricProjection.paint(g);
@@ -123,6 +123,7 @@ public class Task3 extends JFrame {
 
         ProjectedCube threePointProjection = new ProjectedCube(threePointPers.project());
         g.setColor(Color.ORANGE);
+        g.setColor(Color.gray);
         threePointProjection.paint(g);
 //      -------------------------------------------------------------
 
